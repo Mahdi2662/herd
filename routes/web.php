@@ -5,10 +5,7 @@ use App\Models\Job;
 
 
 Route::get('/', function  () {
-    $jobs = job::all();
-
-    dd($jobs);
-   // return view('home');
+    return view('home');
 });
 
 Route::get('/jobs', function ()   {
@@ -21,7 +18,9 @@ Route::get('/jobs', function ()   {
 Route::get('/jobs/{id}', function ($id)  {
     $job =job::find($id);
 
-    return view('job', ['job' => $job]);
+    return view('jobs', [
+        'job' => job::all()
+]);
 });
     
 
