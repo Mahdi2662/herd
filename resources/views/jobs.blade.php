@@ -4,9 +4,9 @@
         Jobs listings
     </x-slot>
     <ul>
-        @foreach ($job as $job)
+        @foreach ($jobs as $job)
             <li>
-                <a href="/jobs/{{ $job['id'] }}" class="text-blue-500 hover:uderline">
+                <a href="/job/{{ $job['id'] }}" class="text-blue-500 hover:uderline">
                 <strong>{{ $job['title'] }}:</strong> Pays {{ $job['salary'] }} per year.
             </a>
             </li>

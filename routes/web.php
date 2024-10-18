@@ -10,16 +10,16 @@ Route::get('/', function  () {
 
 Route::get('/jobs', function ()   {
         return view('jobs', [
-            'jobs' => job::all()
+            'jobs' => Job::all()
         ]);
     });
 
 
-Route::get('/jobs/{id}', function ($id)  {
+Route::get('/job/{id}', function ($id)  {
     $job =job::find($id);
 
-    return view('jobs', [
-        'job' => job::all()
+    return view('job', [
+        'job' => $job
 ]);
 });
     
