@@ -21,8 +21,8 @@ class CreateTagsTable extends Migration
 
         Schema::create('job_tag', function (Blueprint $table) {
             $table->id();
-            $table->foreignId(\App\Models\Job::class, 'job_listing_id' );
-            $table->foreignId(\App\Models\Tag::class,);
+            $table->foreignId('job_id')->constrained('job_listings')->onDelete('cascade');
+            $table->foreignId('tag_id')->constrained('tags')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -34,6 +34,7 @@ class CreateTagsTable extends Migration
      */
     public function down()
     {
+        Schema::dropIfExists('job_tag');
         Schema::dropIfExists('tags');
     }
 }
