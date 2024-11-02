@@ -3,11 +3,17 @@
 use App\Http\Controllers\JobController;
 use App\Http\Controllers\RegisteredUserController;
 use App\Http\Controllers\SessionController;
-use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Mail;
-use App\Mail\JobPosted;
+use App\Jobs\TranslateJob;
 use App\Models\Job;
- 
+use Illuminate\Support\Facades\Route;
+
+Route::get('test', function () {
+    $job = Job::first();
+
+    TranslateJob::dispatch($job);
+
+    return 'Done';
+});
 
 Route::view('/', 'home');
 Route::view('/contact', 'contact');
@@ -31,8 +37,3 @@ Route::post('/register', [RegisteredUserController::class, 'store']);
 Route::get('/login', [SessionController::class, 'create'])->name('login');
 Route::post('/login', [SessionController::class, 'store']);
 Route::post('/logout', [SessionController::class, 'destroy']);
-Route::get('/test-email', function () {
-    $job = Job::first(); // Assuming you have a job in your database
-    Mail::to('test@example.com')->send(new JobPosted($job));
-    return 'Email sent!';
-});
